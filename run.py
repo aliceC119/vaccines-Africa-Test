@@ -14,7 +14,10 @@ SHEET = GSPREAD_CLIENT.open('Vaccines - Africa (2020-2024)')
 
 def get_livessaved_data():
     """
-    Get lives saved figures input from the user
+    Get lives saved figures input from the user.
+    Run a while loop to collecz a valid string of data from the user
+    via the terminal, which must be a string of 8 numbers separated
+    by commas. The loop will repeated request data, until it is valid.
     """
     while True:
         print("Please enter lives saved data from last year.")
@@ -53,7 +56,18 @@ def validate_data(values):
     
     return True
 
+def update_livessaved_worksheet(data):
+    """ 
+    Update livessaved worksheet, add new row with the list data provided.
+    """
+    print("Updating livessaved worksheet...\n")
+    livessaved_worksheet = SHEET.worksheet("livessaved")
+    livessaved_worksheet.append_row(data)
+    print("livessaved worksheet updated successfully.\n")
+
 data = get_livessaved_data()
+livessaved_data = [int(num) for num in data]
+update_livessaved_worksheet(livessaved_data)
 
 
 
