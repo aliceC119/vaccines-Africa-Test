@@ -16,14 +16,24 @@ def get_livessaved_data():
     """
     Get lives saved figures input from the user
     """
-    print("Please enter lives saved data from last year.")
-    print("Data should be eight numbers, separated by commas.")
-    print("Example: 100,200,300,400,500,600,700,800\n")
+    while True:
+        print("Please enter lives saved data from last year.")
+        print("Data should be eight numbers, separated by commas.")
+        print("Example: 100,200,300,400,500,600,700,800\n")
 
-    data_str = input("Enter your data here: ")
+        data_str = input("Enter your data here: ")
     
-    livessaved_data = data_str.split(",")
-    validate_data(livessaved_data)
+        livessaved_data = data_str.split(",")
+
+        if validate_data(livessaved_data):
+            print("Data is valid!")
+            break
+    
+    return livessaved_data
+
+        
+
+
 
 def validate_data(values):
     """ 
@@ -39,8 +49,11 @@ def validate_data(values):
             )
     except ValueError as e:
         print(f"Invalid data: {e}, please try again.\n")
+        return False
+    
+    return True
 
-get_livessaved_data()
+data = get_livessaved_data()
 
 
 
