@@ -75,7 +75,13 @@ def calculate_surplus_data(livessaved_row):
     print("Calculating surplus data...\n")
     vaccineproduce = SHEET.worksheet("vaccineproduce").get_all_values()
     vaccineproduce_row = vaccineproduce[-1]
-    print(vaccineproduce_row)
+    
+    surplus_data = []
+    for vaccineproduce, livessaved in zip(vaccineproduce_row, livessaved_row):
+        surplus = int(vaccineproduce) - livessaved
+        surplus_data.append(surplus)
+    
+    return surplus_data
 
 def main():
     """ 
@@ -84,7 +90,8 @@ def main():
     data = get_livessaved_data()
     livessaved_data = [int(num) for num in data]
     update_livessaved_worksheet(livessaved_data)
-    calculate_surplus_data(livessaved_data)
+    new_surplus_data = calculate_surplus_data(livessaved_data)
+    print(new_surplus_data)
 
 print("Welcome to Lives Saved Data Automation")
 main()
