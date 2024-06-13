@@ -1,5 +1,6 @@
 import gspread
 from google.oauth2.service_account import Credentials
+from pprint import pprint
 
 SCOPE = [
     "https://www.googleapis.com/auth/spreadsheets",
@@ -65,10 +66,28 @@ def update_livessaved_worksheet(data):
     livessaved_worksheet.append_row(data)
     print("livessaved worksheet updated successfully.\n")
 
-data = get_livessaved_data()
-livessaved_data = [int(num) for num in data]
-update_livessaved_worksheet(livessaved_data)
+def calculate_surplus_data(livessaved_row):
+    """ 
+    Compare lives saved number with vaccine produce number and calculate the surplus for each vaccine type.
 
+    The surplus is defined as the lives saved figure subtracted from the vaccine produce number.
+    """
+    print("Calculating surplus data...\n")
+    vaccineproduce = SHEET.worksheet("vaccineproduce").get_all_values()
+    vaccineproduce_row = vaccineproduce[-1]
+    print(vaccineproduce_row)
+
+def main():
+    """ 
+    Run all program functions
+    """
+    data = get_livessaved_data()
+    livessaved_data = [int(num) for num in data]
+    update_livessaved_worksheet(livessaved_data)
+    calculate_surplus_data(livessaved_data)
+
+print("Welcome to Lives Saved Data Automation")
+main()
 
 
 # Your code goes here.
