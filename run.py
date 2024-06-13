@@ -16,12 +16,28 @@ def get_livessaved_data():
     """
     Get lives saved figures input from the user
     """
-    print("Please enter lives saved data from the last year.")
+    print("Please enter lives saved data from last year.")
     print("Data should be eight numbers, separated by commas.")
     print("Example: 100,200,300,400,500,600,700,800\n")
 
     data_str = input("Enter your data here: ")
-    print(f"The data provided is {data_str}")
+    
+    livessaved_data = data_str.split(",")
+    validate_data(livessaved_data)
+
+def validate_data(values):
+    """ 
+    Inside the try, converts all string values into integers.
+    Raises ValueError if strings cannot be converted into int,
+    or if there aren't exactly 8 values.
+    """
+    try:
+        if len(values) != 8:
+            raise ValueError(
+                f"Exactly 8 values required, you provided {len(values)}"
+            )
+    except ValueError as e:
+        print(f"Invalid data: {e}, please try again.\n")
 
 get_livessaved_data()
 
