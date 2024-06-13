@@ -7,12 +7,16 @@ SCOPE = [
     "https://www.googleapis.com/auth/drive"
     ]
 
-CREDS = Credentials.from_service_account_file('creds.json'),
+CREDS = Credentials.from_service_account_file('creds.json')
 SCOPED_CREDS = CREDS.with_scopes(SCOPE)
-GSPREAD_CLIENT = gspread.authorize(SCOPE_CREDS)
-SHEET = GSPREAD_CLIENT.open('Vaccines -Africa (2020-2024)')
+GSPREAD_CLIENT = gspread.authorize(SCOPED_CREDS)
+SHEET = GSPREAD_CLIENT.open('Vaccines - Africa (2020-2024)')
 
+livessaved = SHEET.worksheet('livessaved')
 
+data = livessaved.get_all_values()
+
+print(data)
 
 
 
