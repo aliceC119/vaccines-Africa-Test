@@ -51,5 +51,6 @@ Happy coding!
 10. Print the total lives saved numbers for each vaccine
 
 
-![Blank diagram](https://github.com/aliceC119/vaccines-Africa-Test/assets/162838985/dea733d8-7929-4f8a-a4d2-f8f78fbdea82)
+
+![Blank diagram](https://github.com/aliceC119/vaccines-Africa-Test/assets/162838985/d90cb69f-d3fc-4c26-af6b-3291366bafe3)
 
