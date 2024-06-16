@@ -16,7 +16,7 @@ SHEET = GSPREAD_CLIENT.open('Vaccines - Africa (2020-2024)')
 def get_livessaved_data():
     """
     Get lives saved figures input from the user.
-    Run a while loop to collecz a valid string of data from the user
+    Run a while loop to collect a valid string of data from the user
     via the terminal, which must be a string of 8 numbers separated
     by commas. The loop will repeated request data, until it is valid.
     """
@@ -34,10 +34,6 @@ def get_livessaved_data():
             break
     
     return livessaved_data
-
-        
-
-
 
 def validate_data(values):
     """ 
@@ -66,6 +62,15 @@ def update_livessaved_worksheet(data):
     livessaved_worksheet.append_row(data)
     print("livessaved worksheet updated successfully.\n")
 
+def update_surplus_worksheet(data):
+    """ 
+    Update surplus worksheet, add new row with the list data provided.
+    """
+    print("Updating surplus worksheet...\n")
+    surplus_worksheet = SHEET.worksheet("surplus")
+    surplus_worksheet.append_row(data)
+    print("Surplus worksheet updated successfully.\n")
+
 def calculate_surplus_data(livessaved_row):
     """ 
     Compare lives saved number with vaccine produce number and calculate the surplus for each vaccine type.
@@ -83,6 +88,8 @@ def calculate_surplus_data(livessaved_row):
     
     return surplus_data
 
+
+
 def main():
     """ 
     Run all program functions
@@ -91,7 +98,8 @@ def main():
     livessaved_data = [int(num) for num in data]
     update_livessaved_worksheet(livessaved_data)
     new_surplus_data = calculate_surplus_data(livessaved_data)
-    print(new_surplus_data)
+    update_surplus_worksheet(new_surplus_data)
+    
 
 print("Welcome to Lives Saved Data Automation")
 main()
