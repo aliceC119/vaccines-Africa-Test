@@ -13,6 +13,7 @@ SCOPED_CREDS = CREDS.with_scopes(SCOPE)
 GSPREAD_CLIENT = gspread.authorize(SCOPED_CREDS)
 SHEET = GSPREAD_CLIENT.open('Vaccines - Africa (2020-2024)')
 
+
 def get_livessaved_data():
     """
     Get lives saved figures input from the user.
@@ -26,17 +27,18 @@ def get_livessaved_data():
         print("Example: 100,200,300,400,500,600,700,800\n")
 
         data_str = input("Enter your data here: ")
-    
+
         livessaved_data = data_str.split(",")
 
         if validate_data(livessaved_data):
             print("Data is valid!")
             break
-    
+
     return livessaved_data
 
+
 def validate_data(values):
-    """ 
+    """
     Inside the try, converts all string values into integers.
     Raises ValueError if strings cannot be converted into int,
     or if there aren't exactly 8 values.
@@ -50,11 +52,12 @@ def validate_data(values):
     except ValueError as e:
         print(f"Invalid data: {e}, please try again.\n")
         return False
-    
+
     return True
 
+
 def update_livessaved_worksheet(data):
-    """ 
+    """
     Update livessaved worksheet, add new row with the list data provided.
     """
     print("Updating livessaved worksheet...\n")
@@ -62,8 +65,9 @@ def update_livessaved_worksheet(data):
     livessaved_worksheet.append_row(data)
     print("livessaved worksheet updated successfully.\n")
 
+
 def update_surplus_worksheet(data):
-    """ 
+    """
     Update surplus worksheet, add new row with the list data provided.
     """
     print("Updating surplus worksheet...\n")
@@ -71,27 +75,29 @@ def update_surplus_worksheet(data):
     surplus_worksheet.append_row(data)
     print("Surplus worksheet updated successfully.\n")
 
-def calculate_surplus_data(livessaved_row):
-    """ 
-    Compare lives saved number with vaccine produce number and calculate the surplus for each vaccine type.
 
-    The surplus is defined as the lives saved figure subtracted from the vaccine produce number.
+def calculate_surplus_data(livessaved_row):
+    """
+    Compare lives saved number with vaccine produce number
+    and calculate the surplus for each vaccine type.
+
+    The surplus is defined as the lives saved figure subtracted
+    from the vaccine produce number.
     """
     print("Calculating surplus data...\n")
     vaccineproduce = SHEET.worksheet("vaccineproduce").get_all_values()
     vaccineproduce_row = vaccineproduce[-1]
-    
+
     surplus_data = []
     for vaccineproduce, livessaved in zip(vaccineproduce_row, livessaved_row):
         surplus = int(vaccineproduce) - livessaved
         surplus_data.append(surplus)
-    
+
     return surplus_data
 
 
-
 def main():
-    """ 
+    """
     Run all program functions
     """
     data = get_livessaved_data()
@@ -99,12 +105,9 @@ def main():
     update_livessaved_worksheet(livessaved_data)
     new_surplus_data = calculate_surplus_data(livessaved_data)
     update_surplus_worksheet(new_surplus_data)
-    
+
 
 print("Welcome to Lives Saved Data Automation")
+
+
 main()
-
-
-# Your code goes here.
-# You can delete these comments, but do not change the name of this file
-# Write your code to expect a terminal of 80 characters wide and 24 rows high
