@@ -30,3 +30,27 @@ The deployment terminal is set to 80 columns by 24 rows. That means that each li
 ---
 
 Happy coding!
+
+## Purpose of this project
+
+- Vaccines-Africa want this Python program to show how many lives are saved by each vaccine (diphtheria ,hepatitis B, measles , polio, rubella, tetanus, tuberculosis, yellow fever) on average in Africa between 2020 and 2024.
+- We want to use these averages to help to decide how many vaccines to produce for the next year.
+- We also want to know the total number of lives saved by each of the vaccine from year 2020 to 2024.
+
+## How this program works
+
+1. Collect lives saved data from user
+2. Check that the lives saved data input from the user is valid
+3. Add lives saved data into lives saved worksheet
+4. Calculate surplus numbers (the number of vaccine produce minus the number of lives saved)
+5. Add surplus data to surplus worksheet
+6. Calculate averages lives saved for the last 5 years
+7. Add calculated vaccine produce numbers (if the numbers < 10000 then the same number of vaccines will be produced for the next year, if the numbers > 10000 then less vaccines will be produced in next year according to the calculated numbers)
+8. Print vaccine produce amount for recommendations
+9. Calculate the total number of lives saved for each vaccine between the year 2020 to 2024 ( sum up the numbers of lives saved for each vaccine)
+10. Print the total lives saved numbers for each vaccine
+
+
+
+![Blank diagram](https://github.com/aliceC119/vaccines-Africa-Test/assets/162838985/d90cb69f-d3fc-4c26-af6b-3291366bafe3)
+
