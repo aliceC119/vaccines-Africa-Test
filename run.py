@@ -105,7 +105,6 @@ def get_last_5_entries_livessaved():
 
     return columns
 
-
 def calculate_vaccineproduce_data(data):
     """
     Calculate the average vaccine produce number for each type of vaccine,
@@ -119,7 +118,6 @@ def calculate_vaccineproduce_data(data):
         average = sum(int_column) / len(int_column)
         vaccineproduce_num = average * 2.2
         new_vaccineproduce_data.append(round(vaccineproduce_num))
-    print(new_vaccineproduce_data)
 
     return new_vaccineproduce_data
 
@@ -140,6 +138,8 @@ def calculate_totallivessaved_data(data):
     return new_totallivessaved_data
 
 
+
+
 def main():
     """
     Run all program functions
@@ -147,14 +147,30 @@ def main():
     data = get_livessaved_data()
     livessaved_data = [int(num) for num in data]
     update_worksheet(livessaved_data, "livessaved")
+
     new_surplus_data = calculate_surplus_data(livessaved_data)
     update_worksheet(new_surplus_data, "surplus")
+
+
     livessaved_columns = get_last_5_entries_livessaved()
     vaccineproduce_data = calculate_vaccineproduce_data(livessaved_columns)
     update_worksheet(vaccineproduce_data, "vaccineproduce")
+
     totallivessaved_data = calculate_totallivessaved_data(livessaved_columns)
     update_worksheet(totallivessaved_data, "totallivessaved")
-
+    
+    
+    return vaccineproduce_data
 
 print("Welcome to Vaccines Africa Data Automation")
-main()
+vaccineproduce_data = main()
+
+def get_vaccineproduce_values(data):
+    headings = SHEET.worksheet("vaccineproduce").get_all_values()[0]
+    
+    print("Produce the following numbers of vaccines for next year: \n")
+    
+    return {heading: data for heading, data in zip(headings, data)}
+
+vaccineproduce_values = get_vaccineproduce_values(vaccineproduce_data)
+print(vaccineproduce_values)
