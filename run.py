@@ -22,7 +22,7 @@ def get_livessaved_data():
     by commas. The loop will repeated request data, until it is valid.
     """
     while True:
-        print("Please enter lives saved data from last year.")
+        print("Please enter the numbers of lives saved in the last year by the following vaccines in this order: Diptheria, Hepatitis B, Measles, Polio, Rebella, Tentanus, Tiberculosis, and Yellow Fever.")
         print("Data should be eight numbers, separated by commas.")
         print("Example: 100,200,300,400,500,600,700,800\n")
 
